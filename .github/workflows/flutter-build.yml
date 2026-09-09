@@ -284,10 +284,16 @@ jobs:
 
       - name: Build rustdesk
         run: |
+          # Konfigurationsdatei fuer eigenen Server und Schluessel anlegen
+          Set-Content -Path ./flutter/assets/custom.txt -Value 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' -NoNewline
+
           # Windows: build RustDesk
           # --hwcodec is shared by all Windows targets; per-target extras (e.g. --vram) come from the matrix
           python3 .\build.py --portable --flutter --skip-portable-pack --hwcodec ${{ matrix.job.build-args }}
           mv ./flutter/build/windows/${{ matrix.job.flutter-arch }}/runner/Release ./rustdesk
+
+          # Konfigurationsdatei im Ausfuehrungsverzeichnis ablegen
+          Set-Content -Path ./rustdesk/custom.txt -Value 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' -NoNewline
 
           # Download usbmmidd_v2.zip and extract it to ./rustdesk
           Invoke-WebRequest -Uri https://github.com/rustdesk-org/rdev/releases/download/usbmmidd_v2/usbmmidd_v2.zip -OutFile usbmmidd_v2.zip
@@ -413,7 +419,7 @@ jobs:
           git checkout -- res/msi
           cp -r ./rustdesk ./rustdesk-msi-template
           mv ./rustdesk-msi-template/rustdesk.exe ./rustdesk-msi-template/RDAPPNAM.exe
-          Set-Content -Path ./rustdesk-msi-template/custom.txt -Value 'placeholder' -NoNewline
+          Set-Content -Path ./rustdesk-msi-template/custom.txt -Value 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' -NoNewline
           $assets = './rustdesk-msi-template/data/flutter_assets/assets'
           New-Item -ItemType Directory -Force -Path $assets | Out-Null
           foreach ($a in 'icon.ico','icon.png','logo.png','logo_light.png','logo_dark.png') {
@@ -890,6 +896,9 @@ jobs:
 
       - name: Build rustdesk
         run: |
+          # Konfigurationsdatei fuer eigenen Server und Schluessel anlegen
+          printf '%s' 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' > ./flutter/assets/custom.txt
+
           if [ "${{ matrix.job.target }}" = "aarch64-apple-darwin" ]; then
             MIN_MACOS_VERSION="12.3"
             sed -i -e "s/MACOSX_DEPLOYMENT_TARGET\=[0-9]*.[0-9]*/MACOSX_DEPLOYMENT_TARGET=${MIN_MACOS_VERSION}/" build.py
@@ -1704,6 +1713,9 @@ jobs:
             cargo build --locked --lib $JOBS --features hwcodec,flutter,unix-file-copy-paste --release
             rm -rf target/release/deps target/release/build
             rm -rf ~/.cargo
+
+            # Konfigurationsdatei fuer eigenen Server und Schluessel anlegen
+            printf '%s' 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' > /workspace/flutter/assets/custom.txt
 
             # Setup Flutter
             # disable git safe.directory
