@@ -1083,19 +1083,21 @@ pub fn is_setup(name: &str) -> bool {
 }
 
 pub fn get_custom_rendezvous_server(custom: String) -> String {
+    // Falls ein Server manuell hinterlegt wurde, wird dieser bevorzugt
+    if !custom.is_empty() {
+        return custom;
+    }
     #[cfg(windows)]
     if let Ok(lic) = crate::platform::windows::get_license_from_exe_name() {
         if !lic.host.is_empty() {
             return lic.host.clone();
         }
     }
-    if !custom.is_empty() {
-        return custom;
-    }
     if !config::PROD_RENDEZVOUS_SERVER.read().unwrap().is_empty() {
         return config::PROD_RENDEZVOUS_SERVER.read().unwrap().clone();
     }
-    "".to_owned()
+    // Hardcodierter Standard-Rendezvous-Server
+    "rd.gmfbase.de".to_owned()
 }
 
 #[inline]
@@ -1949,7 +1951,8 @@ pub async fn get_key(sync: bool) -> String {
         options.remove("key").unwrap_or_default()
     };
     if key.is_empty() {
-        key = config::RS_PUB_KEY.to_owned();
+        // Hardcodierter öffentlicher Server-Schlüssel
+        key = "dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=".to_owned();
     }
     key
 }
