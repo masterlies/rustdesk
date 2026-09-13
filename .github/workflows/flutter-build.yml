@@ -293,12 +293,11 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
 
-      - name: Setup WiX Toolset
+      - name: Add WiX v3 to PATH
         if: env.UPLOAD_ARTIFACT == 'true'
+        shell: bash
         run: |
-          dotnet tool install --global wix || true
-          wix extension add -g WixToolset.UI.wixext || true
-          wix extension add -g WixToolset.Util.wixext || true
+          echo "C:\Program Files (x86)\WiX Toolset v3.11\bin" >> $GITHUB_PATH
 
       - name: Build msi
         if: env.UPLOAD_ARTIFACT == 'true'
