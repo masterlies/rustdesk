@@ -162,7 +162,13 @@ def insert_components_between_tags(lines, index_start, app_name, dist_dir, templ
     idx = 1
     for file_path in path.glob("**/*"):
         if file_path.is_file():
+            # Skip main executable so it remains bound to App.exe
             if file_path.name.lower() == f"{app_name}.exe".lower():
+                continue
+
+            # Exclude RDA (virtual display adapter) binaries and drivers to prevent duplicate shortcuts and driver conflicts
+            file_name_lower = file_path.name.lower()
+            if "rda" in file_name_lower or "display-adapter" in file_name_lower:
                 continue
 
             subdir = str(file_path.parent.relative_to(path))
