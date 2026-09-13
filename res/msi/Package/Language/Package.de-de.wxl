@@ -1,0 +1,52 @@
+<!--
+This file contains the declaration of all the localizable strings.
+-->
+<WixLocalization Culture="de-de" Codepage="1252"
+	xmlns="http://wixtoolset.org/schemas/v4/wxl">
+
+	<String Id="SummaryCodepage" Value="1252" />
+	<String Id="ProductLanguage" Value="1031" />
+
+	<!-- General strings -->
+	<String Id="DowngradeError" Value="Eine neuere Version von [ProductName] ist bereits installiert." />
+
+	<String Id="AR_Comment" Value="RustDesk" />
+
+	<String Id="F_App" Value="RustDesk" />
+	<String Id="F_App_Desc" Value="RustDesk - Installation des Hauptprogramms." />
+
+	<String Id="SC_Uninstall" Value="RustDesk deinstallieren" />
+	<String Id="SC_Uninstall_Desc" Value="Entfernt RustDesk vom Computer" />
+
+	<!-- Client related strings -->
+	<String Id="F_Client" Value="Client" />
+	<String Id="F_Client_Desc" Value="Die Benutzeroberfläche für den Fernzugriff." />
+	<String Id="F_LAVFilters" Value="LAV Filters" />
+	<String Id="F_LAVFilters_Desc" Value="Empfohlene Filter für optimale Audio- und Videoübertragung." />
+
+	<String Id="SC_Client" Value="RustDesk" />
+	<String Id="SC_Client_Desc" Value="RustDesk starten." />
+
+	<String Id="SC_Client_Tray" Value="RustDesk Tray" />
+	<String Id="SC_Client_Tray_Desc" Value="RustDesk im Infobereich starten." />
+
+	<!-- Server related strings -->
+	<String Id="F_Server" Value="Server" />
+	<String Id="F_Server_Desc" Value="Dienst für Hintergrundverbindungen." />
+
+	<String Id="Service_DisplayName" Value="RustDesk Dienst" />
+	<String Id="Service_Description" Value="Führt den RustDesk-Hintergrunddienst aus." />
+
+	<!-- Launch Conditions -->
+	<String Id="LC_OS" Value="[ProductName] erfordert mindestens Windows 7 / Server 2008 R2 als Betriebssystem." />
+	<String Id="LC_ADMIN" Value="Sie benötigen Administratorrechte, um [ProductName] zu installieren." />
+
+	<!-- User Interfaces -->
+	<String Id="AnotherAppDialogTitle" Value="Installation abbrechen."/>
+	<String Id="AnotherAppDialogDescription" Value="Die Anwendung ist bereits vorhanden. Bitte deinstallieren Sie diese zuerst."/>
+
+	<String Id="MyInstallDirDlgDesktopShortcuts" Value="Desktop-Verknüpfung erstellen" />
+	<String Id="MyInstallDirDlgStartMenuShortcuts" Value="Startmenü-Verknüpfung erstellen" />
+	<String Id="MyInstallDirDlgPrinter" Value="RustDesk-Druckertreiber installieren" />
+
+</WixLocalization>
