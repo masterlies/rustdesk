@@ -1,10 +1,10 @@
-﻿<Project Sdk="WixToolset.Sdk/4.0.5">
+<Project Sdk="WixToolset.Sdk/4.0.5">
   <PropertyGroup>
     <IncludeSearchPaths>
     </IncludeSearchPaths>
     <Configurations>Release</Configurations>
     <Platforms>x64;ARM64</Platforms>
-    <Cultures>de-DE;en-US</Cultures>
+    <Cultures>de-DE</Cultures>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Includes.wxi" />
@@ -13,8 +13,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Language\Package.de-de.wxl" />
     <EmbeddedResource Include="Language\WixExt_de-de.wxl" />
-    <EmbeddedResource Include="Language\Package.en-us.wxl" />
-    <EmbeddedResource Include="Language\WixExt_en-us.wxl" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Firewall.wixext" Version="4.0.5" />
