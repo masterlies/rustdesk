@@ -1,10 +1,9 @@
 <Project Sdk="WixToolset.Sdk/4.0.5">
   <PropertyGroup>
-    <IncludeSearchPaths>
-    </IncludeSearchPaths>
     <Configurations>Release</Configurations>
     <Platforms>x64;ARM64</Platforms>
     <Cultures>de-DE</Cultures>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Includes.wxi" />
