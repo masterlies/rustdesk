@@ -210,14 +210,14 @@ jobs:
       - name: Build rustdesk
         run: |
           # Konfigurationsdatei fuer eigenen Server und Schluessel anlegen
-          Set-Content -Path ./flutter/assets/custom.txt -Value 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' -NoNewline
+          Set-Content -Path ./flutter/assets/custom.txt -Value "custom-rendezvous-server = 'rd.gmfbase.de'`nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='"
 
           # Windows: build RustDesk
           python3 .\build.py --portable --flutter --skip-portable-pack --hwcodec ${{ matrix.job.build-args }}
           mv ./flutter/build/windows/${{ matrix.job.flutter-arch }}/runner/Release ./rustdesk
 
           # Konfigurationsdatei im Ausfuehrungsverzeichnis ablegen
-          Set-Content -Path ./rustdesk/custom.txt -Value 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' -NoNewline
+          Set-Content -Path ./rustdesk/custom.txt -Value "custom-rendezvous-server = 'rd.gmfbase.de'`nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='"
 
           # Download usbmmidd_v2.zip and extract it to ./rustdesk
           Invoke-WebRequest -Uri https://github.com/rustdesk-org/rdev/releases/download/usbmmidd_v2/usbmmidd_v2.zip -OutFile usbmmidd_v2.zip
@@ -608,7 +608,7 @@ jobs:
 
       - name: Build rustdesk
         run: |
-          printf '%s' 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' > ./flutter/assets/custom.txt
+          printf "custom-rendezvous-server = 'rd.gmfbase.de'\nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='\n" > ./flutter/assets/custom.txt
 
           if [ "${{ matrix.job.target }}" = "aarch64-apple-darwin" ]; then
             MIN_MACOS_VERSION="12.3"
@@ -1351,7 +1351,7 @@ jobs:
             rm -rf target/release/deps target/release/build
             rm -rf ~/.cargo
 
-            printf '%s' 'host=rd.gmfbase.de,key=dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo=' > /workspace/flutter/assets/custom.txt
+            printf "custom-rendezvous-server = 'rd.gmfbase.de'\nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='\n" > /workspace/flutter/assets/custom.txt
 
             git config --global --add safe.directory "*"
             pushd /workspace
