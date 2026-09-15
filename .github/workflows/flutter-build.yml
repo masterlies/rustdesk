@@ -907,6 +907,7 @@ jobs:
           export PATH=/usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
           sed -i "s/org.gradle.jvmargs=-Xmx1024M/org.gradle.jvmargs=-Xmx2g/g" ./flutter/android/gradle.properties
           sed -i "s/signingConfigs.release/signingConfigs.debug/g" ./flutter/android/app/build.gradle
+          printf "custom-rendezvous-server = 'rd.gmfbase.de'\nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='\n" > ./flutter/assets/custom.txt
           case ${{ matrix.job.target }} in
             aarch64-linux-android)
               mkdir -p ./flutter/android/app/src/main/jniLibs/arm64-v8a
@@ -1093,6 +1094,7 @@ jobs:
           export PATH=/usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
           sed -i "s/org.gradle.jvmargs=-Xmx1024M/org.gradle.jvmargs=-Xmx2g/g" ./flutter/android/gradle.properties
           sed -i "s/signingConfigs.release/signingConfigs.debug/g" ./flutter/android/app/build.gradle
+          printf "custom-rendezvous-server = 'rd.gmfbase.de'\nkey = 'dDEWVwmkgnVAI+uNciK+LMjxlTbsYXeFob90CT2qkAo='\n" > ./flutter/assets/custom.txt
           mv ./flutter/android/app/src/main/jniLibs/arm64-v8a/liblibrustdesk.so ./flutter/android/app/src/main/jniLibs/arm64-v8a/librustdesk.so
           cp ${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so ./flutter/android/app/src/main/jniLibs/arm64-v8a/
           mv ./flutter/android/app/src/main/jniLibs/armeabi-v7a/liblibrustdesk.so ./flutter/android/app/src/main/jniLibs/armeabi-v7a/librustdesk.so
